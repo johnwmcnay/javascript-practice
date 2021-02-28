@@ -1,4 +1,3 @@
-
 //Prompt: Given an array of integers nums and an integer target, return indices of the two numbers such that they add
 // up to target. You may assume that each input would have exactly one solution, and you may not use the same
 // element twice.
@@ -21,24 +20,51 @@ function twoSum(numArray, target) {
 
 function twoSumSorted(numArray, target) {
 
-    while (numArray[numArray.length - 1] + numArray[0] > target) {
-        numArray.pop();
+    let leftIndex = 0;
+    let rightIndex = numArray.length - 1;
+    let left = numArray.shift();
+    let right = numArray.pop();
+
+    if (numArray.length === 0) {
+        return [1, 2];
     }
 
-    let index = -1;
-
     do {
-        let number = numArray.shift();
-        let n = 0;
-        index++;
 
-        while (n < numArray.length) {
-            if (numArray[n] + number === target) {
-                return [index + 1, index + 2 + n];
-            }
-            n++;
+        while (left + right < target) {
+            left = numArray.shift();
+            leftIndex++;
         }
-    } while (true)
+
+        while (left + right > target) {
+            right = numArray.pop();
+            rightIndex--;
+        }
+    } while (left + right !== target)
+
+
+    return [leftIndex + 1, rightIndex + 1];
+
+
+    // while (numArray[numArray.length - 1] + numArray[0] > target) {
+    //     numArray.pop();
+    // }
+    //
+    // let index = -1;
+    //
+    // do {
+    //     let number = numArray.shift();
+    //     let n = 0;
+    //     index++;
+    //
+    //     while (n < numArray.length) {
+    //         if (numArray[n] + number === target) {
+    //             return [index + 1, index + 2 + n];
+    //         }
+    //         n++;
+    //     }
+    // } while (true)
+
 
     // let n = 0;
     //
