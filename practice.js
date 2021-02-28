@@ -14,3 +14,26 @@ function twoSum(numArray, target) {
         }
     }
 }
+
+//Prompt: Given an array of integers numbers that is already sorted in ascending order, find two numbers such that
+// they add up to a specific target number. Return the indices of the two numbers (1-indexed) as an integer array
+// answer of size 2, where 1 <= answer[0] < answer[1] <= numbers.length.
+
+function twoSumSorted(numArray, target) {
+
+    let n = 0;
+
+    while (true) {
+
+        let i = n + 1;
+
+        while (i < numArray.length && numArray[i] < target) {
+            if (numArray[n] + numArray[i] === target) {
+                return [n, i];
+            }
+            i++;
+        }
+        n++;
+    }
+
+}
