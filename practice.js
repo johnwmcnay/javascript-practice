@@ -95,7 +95,7 @@ function twoSumSorted(numArray, target) {
     // }
 }
 
-// You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse
+//Prompt: You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse
 // order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 // You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
@@ -159,5 +159,41 @@ function sumLinkedLists(list1, list2) {
     }
 
     return firstNode;
+
+}
+
+//Prompt: Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -.
+
+function alternateSumTwoIntegers(a, b) {
+
+    let right = [];
+    let left = [];
+
+    if (a > 0) {
+        right = right.concat(new Array(a));
+    } else {
+        left = left.concat(new Array(a * -1));
+    }
+
+    if (b > 0) {
+        right = right.concat(new Array(b));
+    } else {
+        left = left.concat(new Array(b * -1));
+    }
+
+    if (right.length > left.length) {
+
+        return right.slice(left.length);
+    }
+
+    if (right.length < left.length) {
+        for (let i of right) {
+            left.pop();
+        }
+
+        return left.slice(right.length) * -1;
+    }
+
+    return 0;
 
 }
