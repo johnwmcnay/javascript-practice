@@ -183,15 +183,12 @@ function alternateSumTwoIntegers(a, b) {
 
     if (right.length > left.length) {
 
-        return right.slice(left.length);
+        return right.slice(left.length).length;
     }
 
     if (right.length < left.length) {
-        for (let i of right) {
-            left.pop();
-        }
 
-        return left.slice(right.length) * -1;
+        return left.slice(right.length).length * -1;
     }
 
     return 0;
