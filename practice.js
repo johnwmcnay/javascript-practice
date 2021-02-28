@@ -127,14 +127,37 @@ function createReversedLinkedList(num) {
 
 function sumLinkedLists(list1, list2) {
 
+    let operand1 = list1;
+    let operand2 = list2;
     let firstNode = null;
     let previousNode = null;
+    let carry = 0;
 
-    while (list1.next === null || list2.next === null) {
-        let digitSum = list1.val + list2.val;
+    do {
+        let digitSum = (operand1 ? operand1.val : 0) + (operand2 ? operand2.val : 0) + carry;
+        let node = new ListNode(digitSum % 10, null);
 
+        if (firstNode === null) {
+            firstNode = node;
+        }
 
+        if (previousNode !== null) {
+            previousNode.next = node;
+        }
 
+        carry = digitSum > 9 ? 1 : 0;
+        previousNode = node;
+        console.log("operand1 :", operand1);
+        console.log("operand2 :", operand2);
+        operand1 = operand1 ? operand1.next : null;
+        operand2 = operand2 ? operand2.next : null;
+
+    } while (operand1 !== null || operand2 !== null)
+
+    if (carry) {
+        previousNode.next = new ListNode(1, null);
     }
+
+    return firstNode;
 
 }
