@@ -9,7 +9,7 @@ function twoSum(numArray, target) {
         let number = numArray[i];
         let supplementIndex = numArray.indexOf(target - number);
 
-        if (supplementIndex !== -1) {
+        if (supplementIndex !== -1 && supplementIndex !== parseInt(i)) {
             return [parseInt(i), supplementIndex];
         }
     }
