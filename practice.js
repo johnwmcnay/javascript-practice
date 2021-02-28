@@ -79,19 +79,62 @@ function twoSumSorted(numArray, target) {
     // } while (true)
 
 
-    let n = 0;
+    // let n = 0;
+    //
+    // while (true) {
+    //
+    //     let i = n + 1;
+    //
+    //     while (i < numArray.length && numArray[i] < target) {
+    //         if (numArray[n] + numArray[i] === target) {
+    //             return [n, i];
+    //         }
+    //         i++;
+    //     }
+    //     n++;
+    // }
+}
 
-    while (true) {
+// You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse
+// order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+// You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
-        let i = n + 1;
+function ListNode(val, next) {
+        this.val = (val === undefined ? 0 : val)
+        this.next = (next === undefined ? null : next)
+}
 
-        while (i < numArray.length && numArray[i] < target) {
-            if (numArray[n] + numArray[i] === target) {
-                return [n, i];
-            }
-            i++;
+function createReversedLinkedList(num) {
+    let reverseStringNumber = num.toString().split("").reverse().join("");
+    let firstNode = null
+    let previousNode = null;
+
+    for (let stringDigit of reverseStringNumber) {
+        let node = new ListNode(parseInt(stringDigit), null);
+
+        if (firstNode === null) {
+            firstNode = node;
         }
-        n++;
+
+        if (previousNode !== null) {
+            previousNode.next = node;
+        }
+
+        previousNode = node;
+    }
+    return firstNode;
+}
+
+function sumLinkedLists(list1, list2) {
+
+    let firstNode = null;
+    let previousNode = null;
+
+    while (list1.next === null || list2.next === null) {
+        let digitSum = list1.val + list2.val;
+
+
+
     }
 
 }
