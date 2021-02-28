@@ -21,19 +21,38 @@ function twoSum(numArray, target) {
 
 function twoSumSorted(numArray, target) {
 
-    let n = 0;
-
-    while (true) {
-
-        let i = n + 1;
-
-        while (i < numArray.length && numArray[i] < target) {
-            if (numArray[n] + numArray[i] === target) {
-                return [n, i];
-            }
-            i++;
-        }
-        n++;
+    while (numArray[numArray.length - 1] + numArray[0] > target) {
+        numArray.pop();
     }
+
+    let index = -1;
+
+    do {
+        let number = numArray.shift();
+        let n = 0;
+        index++;
+
+        while (n < numArray.length) {
+            if (numArray[n] + number === target) {
+                return [index + 1, index + 2 + n];
+            }
+            n++;
+        }
+    } while (true)
+
+    // let n = 0;
+    //
+    // while (true) {
+    //
+    //     let i = n + 1;
+    //
+    //     while (i < numArray.length && numArray[i] < target) {
+    //         if (numArray[n] + numArray[i] === target) {
+    //             return [n, i];
+    //         }
+    //         i++;
+    //     }
+    //     n++;
+    // }
 
 }
