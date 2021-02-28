@@ -22,28 +22,41 @@ function twoSumSorted(numArray, target) {
 
     let leftIndex = 0;
     let rightIndex = numArray.length - 1;
-    let left = numArray.shift();
-    let right = numArray.pop();
 
-    if (numArray.length === 0) {
-        return [1, 2];
-    }
+    while (numArray[leftIndex] + numArray[rightIndex] !== target) {
 
-    do {
-
-        while (left + right < target) {
-            left = numArray.shift();
+        while (numArray[leftIndex] + numArray[rightIndex] < target) {
             leftIndex++;
         }
 
-        while (left + right > target) {
-            right = numArray.pop();
+        while (numArray[leftIndex] + numArray[rightIndex] > target) {
             rightIndex--;
         }
-    } while (left + right !== target)
 
+    }
 
     return [leftIndex + 1, rightIndex + 1];
+
+    // let leftIndex = 0;
+    // let rightIndex = numArray.length - 1;
+    // let left, right;
+    //
+    // do {
+    //
+    //     left = numArray[leftIndex];
+    //     right = numArray[rightIndex];
+    //
+    //     while (left + right < target) {
+    //         leftIndex++;
+    //     }
+    //
+    //     while (left + right > target) {
+    //         rightIndex--;
+    //     }
+    // } while (left + right !== target)
+    //
+    //
+    // return [leftIndex + 1, rightIndex + 1];
 
 
     // while (numArray[numArray.length - 1] + numArray[0] > target) {
@@ -66,19 +79,19 @@ function twoSumSorted(numArray, target) {
     // } while (true)
 
 
-    // let n = 0;
-    //
-    // while (true) {
-    //
-    //     let i = n + 1;
-    //
-    //     while (i < numArray.length && numArray[i] < target) {
-    //         if (numArray[n] + numArray[i] === target) {
-    //             return [n, i];
-    //         }
-    //         i++;
-    //     }
-    //     n++;
-    // }
+    let n = 0;
+
+    while (true) {
+
+        let i = n + 1;
+
+        while (i < numArray.length && numArray[i] < target) {
+            if (numArray[n] + numArray[i] === target) {
+                return [n, i];
+            }
+            i++;
+        }
+        n++;
+    }
 
 }
