@@ -197,29 +197,55 @@ function alternateSumTwoIntegers(a, b) {
 
 //Given a string s, find the length of the longest substring without repeating characters.
 function lengthOfLongestSubstring(str) {
+
     let i = 0;
-    let substring = "";
+    let j = 0;
     let longestLength = 0;
+    let characters = "";
 
-    while (i < str.length) {
+    while (i < str.length - longestLength && j < str.length) {
+        j = i + 1;
+        characters = str[i];
 
-        if (substring === "") {
-            substring = str[i];
-        } else {
-            let currentCharacter = str[i];
-            if (substring.indexOf(currentCharacter) === -1) {
-                substring += currentCharacter;
-                longestLength = Math.max(longestLength, substring.length);
+        while (j < str.length) {
+
+            if (characters.indexOf(str[j]) === -1) {
+                characters += str[j];
             } else {
-                if (i + longestLength > str.length) {
-                    break;
-                }
-
-                substring = str[i];
-
+                longestLength = Math.max(longestLength, characters.length);
+                break;
             }
+            j++;
         }
         i++;
     }
-    return Math.max(longestLength, substring.length);
+
+    return Math.max(longestLength, characters.length);
+
+
+    // let i = 0;
+    // let substring = "";
+    // let longestLength = 0;
+    //
+    // while (i < str.length) {
+    //
+    //     if (substring === "") {
+    //         substring = str[i];
+    //     } else {
+    //         let currentCharacter = str[i];
+    //         if (substring.indexOf(currentCharacter) === -1) {
+    //             substring += currentCharacter;
+    //             longestLength = Math.max(longestLength, substring.length);
+    //         } else {
+    //             if (i + longestLength > str.length) {
+    //                 break;
+    //             }
+    //
+    //             substring = str[i];
+    //
+    //         }
+    //     }
+    //     i++;
+    // }
+    // return Math.max(longestLength, substring.length);
 }
