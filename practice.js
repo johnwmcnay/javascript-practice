@@ -198,8 +198,6 @@ function alternateSumTwoIntegers(a, b) {
 //Given a string s, find the length of the longest substring without repeating characters.
 function lengthOfLongestSubstring(str) {
     let i = 0;
-    let startIndex = 0;
-    let longestIndex = 0;
     let substring = "";
     let longestLength = 0;
 
@@ -207,24 +205,21 @@ function lengthOfLongestSubstring(str) {
 
         if (substring === "") {
             substring = str[i];
-            startIndex = i;
         } else {
             let currentCharacter = str[i];
-            if (str.substr(startIndex, i).indexOf(currentCharacter) === -1) {
+            if (substring.indexOf(currentCharacter) === -1) {
                 substring += currentCharacter;
-
+                longestLength = Math.max(longestLength, substring.length);
             } else {
-
-                if (substring.length > longestLength) {
-                    longestIndex = startIndex;
-                    longestLength = substring.length;
-                    continue;
+                if (i + longestLength > str.length) {
+                    break;
                 }
-                substring = "";
-            }
 
+                substring = str[i];
+
+            }
         }
         i++;
     }
-    return longestLength;
+    return Math.max(longestLength, substring.length);
 }
