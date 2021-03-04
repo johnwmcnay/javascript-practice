@@ -251,7 +251,76 @@ function lengthOfLongestSubstring(str) {
 }
 
 // Given a string s, return the longest palindromic substring in s.
+
 function longestPalindrome(str) {
+
+    //it's only a palindrome if the first and last letter are the same and the pattern repeats to the "center"
+    //check first and last character, if they are different, check first and second-to-last character
+    //when you find a match, repeat the process
+
+    let leftIndex = 0;
+    let longest = "";
+
+    while (leftIndex < str.length) {
+
+        let rightIndex = str.length - 1;
+
+        while (rightIndex >= leftIndex) {
+            let offset = 0;
+
+            while (str[leftIndex + offset] === str[rightIndex - offset] && leftIndex + offset < str.length) {
+                offset++;
+            }
+
+            if (leftIndex + (2 * offset) >= rightIndex) {
+                let palindrome = str.substring(leftIndex, rightIndex + 1);
+
+                if (palindrome.length === str.length) {
+                    return str;
+                }
+
+                if (palindrome.length > longest.length) {
+                    longest = palindrome;
+                }
+
+            }
+            rightIndex--;
+        }
+        leftIndex++;
+    }
+
+    return longest;
+
+    // let longest = "";
+    //
+    // let rightIndex = str.length - 1;
+    //
+    // while (rightIndex >= 0) {
+    //
+    //     let leftIndex = 0;
+    //
+    //     while (leftIndex < rightIndex) {
+    //
+    //         let count = 0;
+    //
+    //         while (str[leftIndex] === str[rightIndex] && rightIndex > leftIndex) {
+    //             leftIndex++;
+    //             rightIndex--;
+    //             count++;
+    //         }
+    //
+    //         if (rightIndex <= leftIndex) {
+    //             let palindrome = str.substring(leftIndex - count, rightIndex + count + 1);
+    //             if (palindrome.length > longest.length) {
+    //                 longest = palindrome;
+    //             }
+    //         }
+    //         leftIndex++;
+    //     }
+    //     rightIndex--;
+    // }
+    //
+    // return longest;
 
     //length <= 1 returns self
     //
