@@ -254,49 +254,49 @@ function lengthOfLongestSubstring(str) {
 function longestPalindrome(str) {
 
     //length <= 1 returns self
-
-    let longestPalindrome = "";
-    let leftIndex = 0;
-
-
-    //example: badbob     popop    abacbacba
-
-
-    while (leftIndex < str.length) {
-
-        let rightIndex = str.length - 1;
-
-        while (str[leftIndex] !== str[rightIndex] && rightIndex > leftIndex) {
-            rightIndex--;
-        }
-
-        let iterations = (rightIndex - leftIndex + 1) / 2;
-        let count = 0;
-
-        while (count < iterations) {
-            leftIndex++;
-            rightIndex--;
-
-            if (str[leftIndex] !== str[rightIndex]) {
-                break;
-            }
-            count++;
-        }
-
-        if (str[leftIndex] === str[rightIndex]) {
-            let palindrome = str.substring(leftIndex - count, rightIndex + count + 1);
-            if (palindrome.length > longestPalindrome.length) {
-                longestPalindrome = palindrome;
-            }
-        }
-        leftIndex++;
-    }
-
-    return longestPalindrome;
-    // if (leftIndex === rightIndex) {
-    //     if (longestPalindrome.length < 1) {
-    //         longestPalindrome = str[leftIndex];
+    //
+    // let longestPalindrome = "";
+    // let leftIndex = 0;
+    //
+    //
+    // //example: badbob     popop    abacbacba
+    //
+    //
+    // while (leftIndex < str.length) {
+    //
+    //     let rightIndex = str.length - 1;
+    //
+    //     while (rightIndex > leftIndex) {
+    //
+    //         while (str[leftIndex] !== str[rightIndex] && rightIndex > leftIndex) {
+    //             rightIndex--;
+    //         }
+    //
+    //         let iterations = (rightIndex - leftIndex) / 2;
+    //         let count = 0;
+    //
+    //         while (count < iterations) {
+    //             leftIndex++;
+    //             rightIndex--;
+    //
+    //             if (str[leftIndex] !== str[rightIndex]) {
+    //                 break;
+    //             }
+    //             count++;
+    //         }
+    //
+    //         if (count === iterations) {
+    //             let palindrome = str.substring(leftIndex - iterations, rightIndex + iterations + 1);
+    //             if (palindrome.length > longestPalindrome.length) {
+    //                 longestPalindrome = palindrome;
+    //             }
+    //         }
+    //         rightIndex--;
     //     }
+    //     leftIndex++;
     // }
+    //
+    // return longestPalindrome;
+
 
 }
