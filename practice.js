@@ -366,6 +366,37 @@ function longestPalindrome(str) {
     // }
     //
     // return longestPalindrome;
+}
+//
+// The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want
+// to display this pattern in a fixed font for better legibility)
+// P   A   H   N
+// A P L S I I G
+// Y   I   R
+// And then read line by line: "PAHNAPLSIIGYIR"
+// Write the code that will take a string and make this conversion given a number of rows:
 
+function convertToZigZag(str, rows) {
 
+    let convertedString = "";
+
+    //first row
+    for (let i = 0; i < str.length; i += 2 * (rows - 1)) {
+        convertedString += str[i];
+    }
+
+    //second row
+    let i = 1;
+    while (i < str.length) {
+
+        convertedString += str[i];
+
+        if (i % 2) {
+            i += 2;
+        } else {
+            i += 2 * (rows - 2);
+        }
+    }
+
+    return convertedString;
 }
