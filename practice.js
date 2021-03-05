@@ -379,24 +379,60 @@ function longestPalindrome(str) {
 function convertToZigZag(str, rows) {
 
     let convertedString = "";
+    let endStr = "";
+    let leftIndex = 0;
+    let rightIndex = rows - 1;
 
-    //first row
+    //first row, and last row
     for (let i = 0; i < str.length; i += 2 * (rows - 1)) {
         convertedString += str[i];
-    }
-
-    //second row
-    let i = 1;
-    while (i < str.length) {
-
-        convertedString += str[i];
-
-        if (i % 2) {
-            i += 2;
-        } else {
-            i += 2 * (rows - 2);
+        if (rows - 1 + i < str.length) {
+            endStr += str[rows - 1 + i];
         }
     }
 
-    return convertedString;
+    leftIndex++;
+    rightIndex--;
+
+    while (leftIndex < rightIndex) {
+
+        let i = leftIndex;
+
+        while (i < str.length) {
+
+            convertedString += str[i];
+
+            if (i % 2) {
+                i += 2;
+            } else {
+                i += 2 * (rows - 2);
+            }
+        }
+        leftIndex++;
+        rightIndex--;
+
+    }
+
+    if (leftIndex === rightIndex) {
+
+        for (let i = leftIndex; i < str.length; i += rows - 1) {
+            convertedString += str[i];
+        }
+
+    }
+
+    //second row
+    // let i = 1;
+    // while (i < str.length) {
+    //
+    //     convertedString += str[i];
+    //
+    //     if (i % 2) {
+    //         i += 2;
+    //     } else {
+    //         i += 2 * (rows - 2);
+    //     }
+    // }
+
+    return convertedString + endStr;
 }
