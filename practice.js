@@ -367,6 +367,7 @@ function longestPalindrome(str) {
     //
     // return longestPalindrome;
 }
+
 //
 // The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want
 // to display this pattern in a fixed font for better legibility)
@@ -378,61 +379,112 @@ function longestPalindrome(str) {
 
 function convertToZigZag(str, rows) {
 
+    if (rows === 1) {
+        return str;
+    }
+
     let convertedString = "";
-    let endStr = "";
-    let leftIndex = 0;
-    let rightIndex = rows - 1;
 
-    //first row, and last row
-    for (let i = 0; i < str.length; i += 2 * (rows - 1)) {
-        convertedString += str[i];
-        if (rows - 1 + i < str.length) {
-            endStr += str[rows - 1 + i];
+    for (let offset = 0; offset < rows; offset++) {
+
+        let position = offset;
+        let firstJump = 2 * (rows - 1 - offset);
+        let secondJump = offset * 2;
+
+        if (firstJump === 0) {
+            firstJump = secondJump
+        } else if (secondJump === 0) {
+            secondJump = firstJump;
         }
-    }
 
-    leftIndex++;
-    rightIndex--;
+        let first = true;
 
-    while (leftIndex < rightIndex) {
+        while (position < str.length) {
 
-        let i = leftIndex;
+            convertedString += str[position];
 
-        while (i < str.length) {
-
-            convertedString += str[i];
-
-            if (i % 2) {
-                i += 2;
-            } else {
-                i += 2 * (rows - 2);
+            if (first) {
+                position += firstJump;
+            } else if (!first) {
+                position += secondJump;
             }
-        }
-        leftIndex++;
-        rightIndex--;
 
+            first = !first;
+        }
     }
 
-    if (leftIndex === rightIndex) {
+    return convertedString;
 
-        for (let i = leftIndex; i < str.length; i += rows - 1) {
-            convertedString += str[i];
-        }
-
-    }
-
-    //second row
-    // let i = 1;
-    // while (i < str.length) {
     //
+    //
+    // //first row, and last row
+    // for (let i = 0; i < str.length; i += 2 * (rows - 1)) {
     //     convertedString += str[i];
-    //
-    //     if (i % 2) {
-    //         i += 2;
-    //     } else {
-    //         i += 2 * (rows - 2);
+    //     if (rows - 1 + i < str.length) {
+    //         endStr += str[rows - 1 + i];
     //     }
     // }
-
-    return convertedString + endStr;
+    //
+    // leftIndex++;
+    // rightIndex--;
+    //
+    // while (leftIndex < rightIndex) {
+    //
+    //     let i = leftIndex;
+    //     let bigJump = 2 * (rows - 2);
+    //     let smallJump = leftIndex * 2;
+    //     let big = true;
+    //
+    //     while (i < str.length) {
+    //
+    //         convertedString += str[i];
+    //
+    //         if (big) {
+    //             i += bigJump;
+    //         } else {
+    //             i += smallJump;
+    //         }
+    //
+    //         big = !big;
+    //     }
+    //
+    //     i = rightIndex;
+    //     big = false;
+    //
+    //     while (i < str.length) {
+    //
+    //         endStr = endStr + str[i];
+    //
+    //         if (big) {
+    //             i += bigJump;
+    //         } else {
+    //             i += smallJump;
+    //         }
+    //     }
+    //
+    //     leftIndex++;
+    //     rightIndex--;
+    //
+    // }
+    //
+    // if (leftIndex === rightIndex) {
+    //
+    //     for (let i = leftIndex; i < str.length; i += rows - 1) {
+    //         convertedString += str[i];
+    //     }
+    //
+    // }
+    //
+    // //second row
+    // // let i = 1;
+    // // while (i < str.length) {
+    // //
+    // //     convertedString += str[i];
+    // //
+    // //     if (i % 2) {
+    // //         i += 2;
+    // //     } else {
+    // //         i += 2 * (rows - 2);
+    // //     }
+    // // }
 }
