@@ -18,4 +18,43 @@ function reverseInteger(num) {
     reverseStr = sign + numStr.split("").reverse().join("");
 
     return parseInt(reverseStr);
+
+}
+
+// Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+function findMedianSortedArrays(nums1, nums2) {
+    let totalLength = nums1.length + nums2.length;
+    let medianIndex = Math.floor(totalLength / 2) - (totalLength % 2 === 0 ? 1 : 0);
+
+    if (totalLength === 1) {
+        return nums1.length ? nums1[0] : nums2[0];
+    }
+
+    let leftIterator = 0;
+    let rightIterator = 0;
+    let iterator = 0;
+    let median = [];
+
+    while (median.length < (totalLength % 2 === 0 ? 2 : 1)) {
+
+        if (rightIterator >= nums2.length || nums1[leftIterator] < nums2[rightIterator]) {
+
+            if (iterator >= medianIndex) {
+                median.push(nums1[leftIterator]);
+            }
+            leftIterator++;
+
+        } else {
+
+            if (iterator >= medianIndex) {
+                median.push(nums2[rightIterator]);
+            }
+            rightIterator++;
+
+        }
+
+        iterator++;
+    }
+
+    return median.length === 1 ? median[0] : (median[0] + median[1]) / 2;
 }
