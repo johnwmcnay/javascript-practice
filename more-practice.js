@@ -143,3 +143,30 @@ function isValidPattern(s, p) {
 
     return convertedStr === s;
 }
+
+//Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
+// n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
+// Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
+function maxArea(heights) {
+    let length = heights.length;
+    let biggestArea = 0;
+
+    for (let i = 0; i < length; i++) {
+
+        let currentHeight = heights[i];
+
+        for (let j = 0; j < length; j++) {
+            if (i === j) {
+                continue;
+            }
+
+            let heightToCompare = heights[j];
+
+            if (heightToCompare <= currentHeight) {
+                let currentArea = Math.abs((i - j) * heightToCompare);
+                biggestArea = Math.max(currentArea, biggestArea);
+            }
+        }
+    }
+    return biggestArea;
+}
