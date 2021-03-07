@@ -148,25 +148,75 @@ function isValidPattern(s, p) {
 // n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
 // Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
 function maxArea(heights) {
-    let length = heights.length;
-    let biggestArea = 0;
+    let leftIndex = 0;
+    let rightIndex = heights.length - 1;
+    // let dimension = 0;
+    // let moveToRight = null;
+    let area = 0;
 
-    for (let i = 0; i < length; i++) {
+    while (leftIndex < rightIndex) {
 
-        let currentHeight = heights[i];
+        let leftHeight = heights[leftIndex];
+        let rightHeight = heights[rightIndex];
 
-        for (let j = 0; j < length; j++) {
-            if (i === j) {
-                continue;
-            }
+        let width = rightIndex - leftIndex;
+        area = Math.max(Math.min(leftHeight, rightHeight) * width, area);
 
-            let heightToCompare = heights[j];
-
-            if (heightToCompare <= currentHeight) {
-                let currentArea = Math.abs((i - j) * heightToCompare);
-                biggestArea = Math.max(currentArea, biggestArea);
-            }
+        if (leftHeight > rightHeight) {
+            rightIndex--;
+        } else {
+            leftIndex++;
         }
     }
-    return biggestArea;
+    return area;
 }
+
+//     let length = heights.length - 1;
+//     let keyHeight = heights[0];
+//     let biggestArea = keyHeight;
+//     let storedIndex = 0;
+
+//     for (let i = length; i > 0; i++) {
+
+//         let currentHeight = heights[i];
+//         let currentWidth = i;
+
+//         if (currentHeight < keyHeight) {
+//             continue;
+//         }
+
+//         let area = currentHeight * currentWidth;
+
+//         if (area > biggestArea) {
+//             storedIndex = i;
+//             keyHeight = currentHeight;
+//             biggestArea = area;
+//             break;
+//         }
+
+//     }
+
+
+// if (currentHeight < biggestHeight) {
+//     continue;
+// } else {
+//     biggestHeight = currentHeight;
+// }
+//         if (currentHeight * (length - i - 1) < biggestArea) {
+//             continue;
+//         } else {
+//             biggestArea = currentHeight * (length - i - 1);
+//         }
+
+//         for (let j = 0; j < length; j++) {
+//             if (i === j) {
+//                 continue;
+//             }
+
+//             let heightToCompare = heights[j];
+
+//             if (heightToCompare <= currentHeight) {
+//                 let currentArea = Math.abs((i - j) * heightToCompare);
+//                 biggestArea = Math.max(currentArea, biggestArea);
+//             }
+//         }
