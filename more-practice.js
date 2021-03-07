@@ -58,3 +58,65 @@ function findMedianSortedArrays(nums1, nums2) {
 
     return median.length === 1 ? median[0] : (median[0] + median[1]) / 2;
 }
+
+// Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*' where:
+//     '.' Matches any single character.
+// '*' Matches zero or more of the preceding element.
+//     The matching should cover the entire input string (not partial).
+function isValidPattern(s, p) {
+    let convertPattern = () => {
+
+        let str = p;
+
+        while (str.indexOf("*") !== -1) {
+            let character = str[str.indexOf("*") - 1];
+
+            str = str.replace(character + "*", character === "." ? ":" : character.toUpperCase());
+        }
+
+        return str;
+    }
+
+    let pattern = convertPattern();
+
+    let patternIndex = 0;
+    let stringIndex = 0;
+    let convertedStr = "";
+
+    while (patternIndex < pattern.length && stringIndex < s.length) {
+
+        let validCharacter = pattern[patternIndex];
+        let currentCharacter = s[stringIndex];
+
+        //when the current valid character is '.*''
+        if (validCharacter === ':') {
+
+            return true;
+
+        } else if (validCharacter === '.') {
+
+            convertedStr += currentCharacter;
+
+        } else if (validCharacter === validCharacter.toUpperCase()) {
+
+            let ch = validCharacter.toLowerCase();
+
+            while (ch === s[stringIndex]) {
+                convertedStr += ch;
+                stringIndex++;
+            }
+
+        } else {
+            if (currentCharacter !== validCharacter) {
+                return false;
+            }
+            convertedStr += validCharacter;
+            stringIndex++;
+        }
+
+        patternIndex++;
+
+    }
+
+    return convertedStr === s;
+}
