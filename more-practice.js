@@ -59,11 +59,18 @@ function findMedianSortedArrays(nums1, nums2) {
     return median.length === 1 ? median[0] : (median[0] + median[1]) / 2;
 }
 
+//==INCOMPLETE==
 // Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*' where:
 //     '.' Matches any single character.
 // '*' Matches zero or more of the preceding element.
 //     The matching should cover the entire input string (not partial).
 function isValidPattern(s, p) {
+    if (p.indexOf(".") === -1 && p.indexOf("*") === -1) {
+        if (p.length > s.length) {
+            return false;
+        }
+    }
+
     let convertPattern = () => {
 
         let str = p;
@@ -83,7 +90,7 @@ function isValidPattern(s, p) {
     let stringIndex = 0;
     let convertedStr = "";
 
-    while (patternIndex < pattern.length && stringIndex < s.length) {
+    while (patternIndex < pattern.length) {
 
         let validCharacter = pattern[patternIndex];
         let currentCharacter = s[stringIndex];
@@ -91,7 +98,23 @@ function isValidPattern(s, p) {
         //when the current valid character is '.*''
         if (validCharacter === ':') {
 
-            return true;
+            if (patternIndex !== pattern.length - 1) {
+
+                patternIndex++;
+
+                let ch = pattern[patternIndex];
+
+                let position = s.lastIndexOf(ch);
+
+                if (position === -1) {
+                    return false;
+                } else {
+                    stringIndex = position + 1;
+                    convertedStr += ch;
+                }
+            } else {
+                return true;
+            }
 
         } else if (validCharacter === '.') {
 
